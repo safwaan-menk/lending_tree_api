@@ -49,6 +49,5 @@ def resource_not_found(e):
 def server_error(e):
     app.logger.error(f"Server error: {request.url}")
     return jsonify(error=str(e)), 500
-
-# uncomment for local testing.
-# app.run()
+ 
+app.run()
