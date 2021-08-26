@@ -6,21 +6,22 @@ import json
 # get the status of the target request
 url = 'https://www.lendingtree.com/reviews/mortgage/reliance-first-capital-llc/45102840/?sort=&pid='
 
-def getdata(url):
-    html_status = requests.get(url)
+def setup(url):
+    try:
+        response = requests.get(url)
+        return BeautifulSoup(response.text, 'lxml')
+    except:
+        return 0
 
-    #TODO: if status != 200 throw error else continue (try/catch)
-    # get html content of page
-    html_text = html_status.text
-
-    #initialize BeautifulSoup
-    soup = BeautifulSoup(html_text, 'lxml')
-    return soup
 def extractsoup(soup):
     reviewData = {}
     #get lender details
+    
     lenderInformation = soup.find('div', class_ = 'lenderHeader')
-    reviewData['lenderName'] = lenderInformation.find('h1').text
+    try:
+        reviewData['lenderName'] = lenderInformation.find('h1').text
+    except:
+        return 0
     reviewData['lenderRating'] = lenderInformation.find('p', class_='total-reviews').text.split(' ', 1)[0]
     lenderRecommendedContainer = lenderInformation.find('div', class_='recommend-text')
     reviewData['lenderRecommendedPercentage'] = lenderRecommendedContainer.find('span').text.replace('%', '')
@@ -33,7 +34,7 @@ def extractsoup(soup):
     starBreakdown = reviewBreakdown.find_all('a')
     currentMaxRating=5
     for starRatings in starBreakdown:
-        stars = 'stars' if currentMaxRating == 1 else 'star' 
+        stars = 'star' if currentMaxRating == 1 else 'stars' 
         reviewSummary[f'{currentMaxRating}{stars} : '] = starRatings.text.replace('(', '').replace(')', '')
         currentMaxRating-=1
     reviewData['reviewSummary'] = reviewSummary
@@ -48,7 +49,7 @@ def extractsoup(soup):
         #get a review's star rating
         reviewProperties['reviewStarRating'] = list(reviews.find('div', class_ = 'numRec').text)[1]
         reviewProperties['lenderRecommended'] = reviews.find('div', class_ = 'lenderRec').text if reviews.find('div', class_ = 'lenderRec') else 'Not Recommended'
-
+        
         #get a reviews details
         reviewDetails = reviews.find_all('div', class_ = 'reviewDetail')
         #get review points
@@ -69,8 +70,9 @@ def extractsoup(soup):
         reviewInformation.append(reviewProperties)
 
     reviewData["reviewInformation"] = reviewInformation
-    with open('data.txt', 'w') as outfile:
-        json.dump(reviewData, outfile)
+    
+    return reviewData if len(reviewData["reviewInformation"]) !=0 else 0
+
 
 # Not working
 # def getlastpage(soup):
@@ -84,5 +86,4 @@ def extractsoup(soup):
 #     else:
 #         return
 
-soup = getdata(url+'3')
-extractsoup(soup)
+
