@@ -50,4 +50,5 @@ def server_error(e):
     app.logger.error(f"Server error: {request.url}")
     return jsonify(error=str(e)), 500
 
-app.run()
+# uncomment for local testing.
+# app.run()
