@@ -32,15 +32,17 @@ mockFailedSoups = [
     'https://www.lendingtree.com/reviews/mortgage/safe-harbor-mortgage-company/31858872',
 ]
 
-
+# Testing setting up api with valid URLs
 @pytest.mark.parametrize("input", mockSuccessfulUrls)
 def test_successful_urls(input):
      assert type(main.setup(input)) == BeautifulSoup 
 
+# Testing setting up api with invalid URLs
 @pytest.mark.parametrize("input", mockFailedUrls)
 def test_failed_urls(input):
      assert main.setup(input) == 0
 
+# Testing getting JSON output from api with valid URLs
 @pytest.mark.parametrize("input", mockSuccessfulSoups)
 def test_successful_soups(input):
     errors = []
@@ -51,6 +53,7 @@ def test_successful_soups(input):
 
     assert not errors, "errors:\n{}".format("\n".join(errors))
 
+# Testing getting JSON output from api with invalid URLs
 @pytest.mark.parametrize("input", mockFailedSoups)
 def test_failed_soups(input):
      assert main.extractsoup(main.setup(input)) == 0 
