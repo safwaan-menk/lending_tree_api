@@ -2,7 +2,6 @@ from flask import Flask, request, render_template, jsonify, render_template_stri
 import main
 
 app = Flask(__name__)
-app.config["DEBUG"] = True
 
 # get reviews from url
 def getReviews(url):
