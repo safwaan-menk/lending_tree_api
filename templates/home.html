@@ -1,19 +1,29 @@
 <div style="margin: auto; width: 50%;padding: 1px;">
     <h1 style="text-align: center;">Lending Tree - API Sepcification</h1>
-    <h3>How to use</h3>
+    <h3>To use! (JSON Output)</h3>
     <ul>
-        <li> Add <strong>  <i>/?url=[LendingTree URL]</i> </strong> to the end of the current url path to make a <strong> GET request </strong> to the API and see the resulting JSON <strong>(Example: http://127.0.0.1:5000/?url=https://www.lendingtree.com/reviews/mortgage/reliance-first-capital-llc/45102840)  </strong> </li>
+        <li> Add <strong>  <i>/?url=[LendingTree URL]</i> </strong> to the end of the current URL path to make a <strong> GET request </strong> to the API and see the resulting JSON <strong>(Example: http://127.0.0.1:5000/?url=https://www.lendingtree.com/reviews/mortgage/reliance-first-capital-llc/45102840)  </strong> </li>
     </ul>
 
     <span> OR </span>
 
     <ul>
-        <li> To quickly see a response, submit LendingTree review URL and see the expected JSON output (This is still an <strong> HTML</strong> response. For a <strong>JSON</strong> response please refer to the <strong> first bullet </strong>) </li>
+        <li> Submit a valid LendingTree URL and hit submit </li>
     </ul>
     
         <form action="/" method="GET">
             <input style="width:80%" type="text" name="url" placeholder="https://www.lendingtree.com/reviews/{LenderType}/{LenderName}/{LenderId}/?sort=&pid={page number}">
-            <input style="width:19%"type="submit" value="submit"></button>
+            <input style="width:19%"type="submit" value="Get JSON"></button>
+        </form>
+
+    <h3> Try me out! (HTML Output) </h3>
+    <ul>
+        <li> To quickly see a n expected response below, submit LendingTree review URL and see the expected JSON output (This is still an <strong> HTML</strong> response. For a <strong>JSON</strong> response please refer to the <strong> first bullet </strong>) </li>
+    </ul>
+    
+        <form action="/" method="POST">
+            <input style="width:80%" type="text" name="url" placeholder="https://www.lendingtree.com/reviews/{LenderType}/{LenderName}/{LenderId}/?sort=&pid={page number}">
+            <input style="width:19%"type="submit" value="See Below"></button>
         </form>
     <div style="margin: auto; width: 90%;padding: 1px;">  {{ data }} </div>   
 </div>

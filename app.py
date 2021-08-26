@@ -1,7 +1,4 @@
-from flask import Flask, request, render_template, jsonify, json, make_response, render_template_string
-from bs4 import BeautifulSoup
-import requests
-from requests import status_codes
+from flask import Flask, request, render_template, jsonify, render_template_string
 import main
 
 app = Flask(__name__)
