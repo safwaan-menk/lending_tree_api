@@ -33,9 +33,9 @@ def extractsoup(soup):
     reviewBreakdown = soup.find('div', class_ = 'reviews-breakdown')
     starBreakdown = reviewBreakdown.find_all('a')
     currentMaxRating=5
+    starCount = {}
     for starRatings in starBreakdown:
-        stars = 'star' if currentMaxRating == 1 else 'stars' 
-        reviewSummary[f'{currentMaxRating}{stars} : '] = starRatings.text.replace('(', '').replace(')', '')
+        starCount[f'{currentMaxRating}'] = starRatings.text.replace('(', '').replace(')', '')
         currentMaxRating-=1
     reviewData['reviewSummary'] = reviewSummary
 

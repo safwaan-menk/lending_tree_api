@@ -1,6 +1,19 @@
-<h1>Lending Tree - API Sepcification</h1>
-<form action="/" method="POST">
-<input type="text" name="url" placeholder="https://www.lendingtree.com/reviews/{Lender Type}/{Lender Name}/{Lender Id} /?sort=&pid={page number}">
-<input type="submit" value="submit"></button>
-</form>
-<span>  {{ data }} </span>   
+<div style="margin: auto; width: 50%;padding: 1px;">
+    <h1 style="text-align: center;">Lending Tree - API Sepcification</h1>
+    <h3>How to use</h3>
+    <ul>
+        <li> Add <strong>  <i>/?url=[LendingTree URL]</i> </strong> to the end of the current url path to make a <strong> POST request </strong> to the API and see the resulting JSON <strong>(Example: http://127.0.0.1:5000/?url=https://www.lendingtree.com/reviews/mortgage/reliance-first-capital-llc/45102840)  </strong> </li>
+    </ul>
+
+    <span> OR </span>
+
+    <ul>
+        <li> To quickly see a response, submit LendingTree review URL and see the expected JSON output (This is still an <strong> HTML</strong> response. For a <strong>JSON</strong> response please refer to the <strong> first bullet </strong>) </li>
+    </ul>
+    
+        <form action="/" method="GET">
+            <input style="width:80%" type="text" name="url" placeholder="https://www.lendingtree.com/reviews/{LenderType}/{LenderName}/{LenderId}/?sort=&pid={page number}">
+            <input style="width:19%"type="submit" value="submit"></button>
+        </form>
+    <div style="margin: auto; width: 90%;padding: 1px;">  {{ data }} </div>   
+</div>

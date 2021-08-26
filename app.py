@@ -20,16 +20,18 @@ def getReviews(url):
             return render_template('home.html', data = "Uh oh. Three things could have happened here. <br> 1. You entered the wrong URL, <br> 2. This lender has no reviews, <br> 3. You have entered a page number passed the max")
     except:
         return render_template_string("{{ e }}")
-    return render_template('home.html', data = json)
+    return json
 
 @app.route('/', methods = ["GET", "POST"])
 def get_data():
     if request.method == "POST":
         url = request.form['url']
-        return getReviews(url)
+        json = getReviews(url)
+        return render_template('home.html', data=json)
     elif request.args.get("url"):
         url = request.args.get("url")
-        return getReviews(url)
+        json =  getReviews(url)
+        return jsonify(json)
     else:
         return render_template('home.html')
 
